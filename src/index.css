@@ -1,13 +1,25 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.custom-audio-player {
+  width: 74%;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  align-items: center;
+  margin-left: 500px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.rhap_progress-bar {
+  display: None;
+}
+
+.rhap_player .rhap_time.rhap_totalTime {
+  display: none !important;
+}
+
+.rhap_time-color {
+  color: white;
+}
+
+button.rhap_play-pause-button {
+  font-size: 44px;
+  /* Adjust the font size as needed */
 }
