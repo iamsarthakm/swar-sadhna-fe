@@ -25,7 +25,7 @@ const buttons = [
     { label: "Dha(K)", value: "da_k" },
     { label: "Dha", value: "da_s" },
     { label: "Ni(K)", value: "ni_k" },
-    { label: "Ni", value: "ni" },
+    { label: "Ni", value: "ni_s" },
 ];
 
 
@@ -99,9 +99,15 @@ export default function Create() {
             const headers = {
                 Authorization: window.localStorage.getItem("token")
             };
+            const params = {
+                name: rhythm
+            }
             try {
                 console.log(window.localStorage.getItem("token"))
-                const response = await axios.get('http://127.0.0.1:8000/sounds/taal', { headers });
+                const response = await axios({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/sounds/taal', params: params, headers: headers
+                });
                 setTaal(response.data)
 
             } catch (error) {
@@ -118,15 +124,26 @@ export default function Create() {
         // };
     }, [rhythm]);
 
-
+    function getCircularIndex(arr, index) {
+        // Ensure index is within the bounds of the arr
+        if (arr.length === 0) {
+            return -1; // Handle empty arr case
+        }
+        console.log("length is", arr.length, "index is ", index, (index % (arr.length - 1)), "the value is ", arr[index % (arr.length - 1)])
+        return ((index % arr.length) + arr.length) % arr.length;
+    }
     function handleSubmit(event) {
         event.preventDefault()
         console.log(selectedValues, start, scale, tempo)
         const fetchAudio = async (data) => {
+            const headers = {
+                Authorization: window.localStorage.getItem("token")
+            };
             try {
                 const response = await axios({
+                    headers: headers,
                     method: "POST",
-                    url: "http://127.0.0.1:8000/sounds/create",
+                    url: "http://127.0.0.1:8000/sounds/",
                     data: data
                 });
                 console.log(response.data); // Log response for debugging
@@ -139,24 +156,22 @@ export default function Create() {
 
         if (start, scale, tempo, selectedValues, taal, name) {
             let main_comp = []
-            // start = start - 1
-            let continue_at = 1
-            for (let i = 0; i = i + 1, i < start;) {
+            for (let i = 0; i < start - 1; i++) {
                 main_comp.push({ "beat_name": taal[i], "notes": [""] })
-                continue_at = i
             }
-            for (let i = 0; i = i + 1, i < selectedValues.length;) {
-                if (continue_at == taal.length - 1) {
-                    continue_at = 0
-                }
-                main_comp.push({ "beat_name": taal[i], "notes": selectedValues[i] })
+            let instart = Number(start)
+            console.log(main_comp)
+            for (let i = 0; i < selectedValues.length; i++) {
+                console.log(i, start, i + instart - 1)
+                main_comp.push({ "beat_name": taal[getCircularIndex(taal, i + instart - 1)], "notes": selectedValues[i] })
             }
+            console.log(main_comp)
 
             let params = {
                 scale: scale,
                 tempo: tempo,
                 instrument: "harmonium",
-                rhythm: "beat",
+                rhythm: rhythm,
                 name: name,
                 sheet_composition: main_comp
             }
@@ -271,7 +286,7 @@ export default function Create() {
                                 value={rhythm}
                                 onChange={(e) => setrhythm(e.target.value)}
                             >
-                                <MenuItem value="teentaalf">Teentaal</MenuItem>
+                                <MenuItem value="teentaal">Teentaal</MenuItem>
                                 <MenuItem value="kehrva">Kehrva</MenuItem>
                                 <MenuItem value="dadra">Dadra</MenuItem>
                             </Select>

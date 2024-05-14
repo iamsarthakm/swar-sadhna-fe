@@ -29,7 +29,7 @@ export default function Player() {
         let rhythmFile = null
         switch (rhythm) {
             case "teentaal":
-                rhythmFile = `/audios/tabla_loops/teentaal_loop_80.mp3`
+                rhythmFile = `/audios/tabla_loops/teental_80.wav`
                 break;
             case "dadra":
                 rhythmFile = `/audios/tabla_loops/dadra_loop_120.mp3`
@@ -141,7 +141,6 @@ export default function Player() {
                     ]}
                     showSkipControls={false}
                     showJumpControls={false}
-                    speed={4}
                 />
             </div>
         </Box >

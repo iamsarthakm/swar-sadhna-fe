@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Link, Routes, } from "react-router-dom";
 import React from "react";
 import Login from "../components/Login";
+import Register from "../components/Register";
 import Player from "../components/MusicPlayer";
 import Navbar from "../components/Navbar";
 // import ForgotPassword from "../features/Authentication/ForgotPassword";
@@ -21,7 +22,8 @@ const App = () => {
 
                 <Route path="/" element={token ? <Login /> : <Navbar />} />
                 <Route path="/main" element={<Navbar />} />
-                <Route path="*" element={<PageNotFound />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
             </Routes>
         </Router>
     );
