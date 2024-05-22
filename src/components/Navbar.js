@@ -18,10 +18,13 @@ import Create from './Create';
 import { useState, useEffect } from 'react';
 import SheetMusic from './SheetMusic';
 import SavedMusic from './savedMusic'
+import Button from '@mui/material/Button';
+import { useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 
 
 export default function Navbar() {
+    const navigate = useNavigate();
     const [tanpuraPlayer, setTanpuraPlayer] = useState(true); // State to track selected item
     const [create, setCreate] = useState(false); // State to track selected item
     const [practice, setPractice] = useState(false);
@@ -40,6 +43,15 @@ export default function Navbar() {
         setCreate(false);
         setTanpuraPlayer(false)
         setPractice(true)
+    };
+    function handleLogout() {
+
+        console.log("hehehehehehehe");
+        let token = window.localStorage.getItem("token")
+        console.log(token)
+        window.localStorage.setItem("token", null)
+        console.log(token)
+        navigate('/login');
     };
 
     const renderSelectedComponent = () => {
@@ -61,6 +73,7 @@ export default function Navbar() {
                     <Typography variant="h6" noWrap component="div">
                         Swar Saadhna
                     </Typography>
+                    <Button variant="contained" onClick={() => handleLogout()}>Log out</Button>
                 </Toolbar>
             </AppBar>
             <Drawer
