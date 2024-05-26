@@ -12,12 +12,13 @@ import Form from './Form'
 import { TextField, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import SheetMusic from './SheetMusic';
 import axios from 'axios';
+import Grid from '@material-ui/core/Grid';
 import qs from 'qs';
 const buttons = [
     { label: "Sa", value: "sa_s" },
-    { label: "Re(k)", value: "re_k" },
+    // { label: "Re(k)", value: "re_k" },
     { label: "Re", value: "re_s" },
-    { label: "Ga(k)", value: "ga_k" },
+    // { label: "Ga(k)", value: "ga_k" },
     { label: "Ga", value: "ga_s" },
     { label: "Ma(t)", value: "ma_t" },
     { label: "Ma", value: "ma_s" },
@@ -185,6 +186,7 @@ export default function Create() {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+                ml: 10,
                 '& > *': {
                     m: 1,
                 },
@@ -193,50 +195,73 @@ export default function Create() {
             <Typography variant="h2" gutterBottom>
                 Create Compositions
             </Typography>
-            <Box sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                '& > *': {
-                    m: 1,
-                },
-            }}>
-                <Button>Lower Octave</Button>
-                <ButtonGroup size="large" aria-label="Large button group">
-                    {buttons.map(({ label, value }) => (
-                        <Button key={value} onClick={() => handleButtonClick(value, "l")}>{label}</Button>
-                    ))}
-                </ButtonGroup>
-            </Box>
-            <Box sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                '& > *': {
-                    m: 1,
-                },
-            }}>
-                <Button>Middle Octave</Button>
-                <ButtonGroup size="large" aria-label="Large button group">
-                    {buttons.map(({ label, value }) => (
-                        <Button key={value} onClick={() => handleButtonClick(value, "m")}>{label}</Button>
-                    ))}
-                </ButtonGroup>
-            </Box>            <Box sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                '& > *': {
-                    m: 1,
-                },
-            }}>
-                <Button>Higher Octave</Button>
-                <ButtonGroup size="large" aria-label="Large button group">
-                    {buttons.map(({ label, value }) => (
-                        <Button key={value} onClick={() => handleButtonClick(value, "h")}>{label}</Button>
-                    ))}
-                </ButtonGroup>
-            </Box>
+            <Grid>
+                <Box>
+                    <Grid container
+                        direction="row" sm={12}
+                        justifyContent="flex-end">
+                        <Box sx={{
+                            // display: 'flex',
+                            // flexDirection: 'row',
+                            // alignItems: 'center',
+                            // justifyContent: 'flex-end',
+                            '& > *': {
+                                ml: 1,
+                            },
+                        }}>
+                            {/* <Button>Higher Octave</Button> */}
+                            <ButtonGroup size="large" aria-label="Large button group">
+                                {buttons.slice(0, 5).map(({ label, value }) => (
+                                    <Button key={value} onClick={() => handleButtonClick(value, "h")}>{label}</Button>
+                                ))}
+                            </ButtonGroup>
+                        </Box>
+                    </Grid>
+                    <Grid
+                        container
+                        direction="row" sm={11}
+                        justifyContent="flex-end">
+
+                        <Box sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            '& > *': {
+                                m: 1,
+                            },
+                        }}>
+                            {/* <Button>Middle Octave</Button> */}
+                            <ButtonGroup size="large" aria-label="Large button group">
+                                {buttons.map(({ label, value }) => (
+                                    <Button key={value} onClick={() => handleButtonClick(value, "m")}>{label}</Button>
+                                ))}
+                            </ButtonGroup>
+                        </Box>
+                    </Grid>
+                    <Grid
+                        container
+                        direction="row" sm={1}
+                        justifyContent="flex-end"
+                    >
+                        <Box sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'flex-end',
+                            justifyContent: 'flex-start',
+                            '& > *': {
+                                m: 1,
+                            },
+                        }}>
+                            {/* <Button>Lower Octave</Button> */}
+                            <ButtonGroup size="large" aria-label="Large button group">
+                                {buttons.slice(7, 12).map(({ label, value }) => (
+                                    <Button key={value} onClick={() => handleButtonClick(value, "l")}>{label}</Button>
+                                ))}
+                            </ButtonGroup>
+                        </Box>
+                    </Grid>
+                </Box>
+            </Grid>
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'row',

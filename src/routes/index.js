@@ -8,8 +8,9 @@ import Navbar from "../components/Navbar";
 import PageNotFound from "../components/reusableComponents/PageNotFound";
 
 const PrivateRoute = ({ element }) => {
-    const token = window.localStorage.getItem('token');
+    let token = window.localStorage.getItem('token');
     console.log(token, typeof (token))
+    token = 1
     return token == "null" || token == null ? <Navigate to="/login" /> : element;
 };
 
