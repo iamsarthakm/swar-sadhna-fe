@@ -12,27 +12,38 @@ import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import Player from './MusicPlayer';
-import Create from './Create';
+import Create from './CreateComposition';
+import CreateAudio from './createAudio';
 import SavedMusic from './savedMusic';
 
 export default function Navbar() {
     const navigate = useNavigate();
     const [tanpuraPlayer, setTanpuraPlayer] = useState(true);
-    const [create, setCreate] = useState(false);
+    const [createComposition, setCreateComposition] = useState(false);
+    const [createAudio, setCreateAudio] = useState(false);
     const [practice, setPractice] = useState(false);
 
     const handleTanpuraClick = () => {
         setTanpuraPlayer(true);
-        setCreate(false);
+        setCreateComposition(false)
+        setCreateAudio(false);
         setPractice(false);
     };
-    const handleCreateClick = () => {
-        setCreate(true);
+    const handleCreateCompositionClick = () => {
+        setCreateComposition(true)
+        setCreateAudio(false);
+        setTanpuraPlayer(false);
+        setPractice(false);
+    };
+    const handleCreateAudioClick = () => {
+        setCreateComposition(false)
+        setCreateAudio(true);
         setTanpuraPlayer(false);
         setPractice(false);
     };
     const handlePracticeClick = () => {
-        setCreate(false);
+        setCreateComposition(false)
+        setCreateAudio(false);
         setTanpuraPlayer(false);
         setPractice(true);
     };
@@ -49,7 +60,10 @@ export default function Navbar() {
         if (tanpuraPlayer) {
             return <Player />;
         }
-        if (create) {
+        if (createAudio) {
+            return <CreateAudio />;
+        }
+        if (createComposition) {
             return <Create />;
         }
         if (practice) {
@@ -58,7 +72,7 @@ export default function Navbar() {
     };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column'}}>
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <CssBaseline />
             <Box
                 sx={{
@@ -86,12 +100,20 @@ export default function Navbar() {
                             <ListItemText primary="Tanpura" />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem onClick={handleCreateClick} disablePadding>
+                    <ListItem onClick={handleCreateAudioClick} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
                                 <InboxIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Create" />
+                            <ListItemText primary="Create Audio" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem onClick={handleCreateCompositionClick} disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <InboxIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Create Composition" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem onClick={handlePracticeClick} disablePadding>
@@ -116,8 +138,8 @@ export default function Navbar() {
             <Box
                 sx={{
                     // width: '70%',
-                    mx: 'auto', 
-                    mt: 2, 
+                    mx: 'auto',
+                    mt: 2,
                     display: 'flex',
                     alignItems: 'center',
                 }}

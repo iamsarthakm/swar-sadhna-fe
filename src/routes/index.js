@@ -10,7 +10,7 @@ import PageNotFound from "../components/reusableComponents/PageNotFound";
 const PrivateRoute = ({ element }) => {
     let token = window.localStorage.getItem('token');
     console.log(token, typeof (token))
-    token = 1
+    // token = 1
     return token == "null" || token == null ? <Navigate to="/login" /> : element;
 };
 

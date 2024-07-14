@@ -22,7 +22,7 @@ function Copyright(props) {
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
             <Link color="inherit" href="https://mui.com/">
-                Your Website
+                Swar Saadhna
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -61,7 +61,7 @@ export default function Register() {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+                        backgroundImage: 'url(/main.jpg)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
                             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -90,20 +90,20 @@ export default function Register() {
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="name"
-                                label="name"
-                                name="name"
-                                autoComplete="name"
+                                id="username"
+                                label="Email or Phone No."
+                                name="username"
+                                autoComplete="username"
                                 autoFocus
                             />
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="username"
-                                label="Email or Phone No."
-                                name="username"
-                                autoComplete="username"
+                                id="name"
+                                label="name"
+                                name="name"
+                                autoComplete="name"
                                 autoFocus
                             />
                             <FormControlLabel
@@ -120,13 +120,13 @@ export default function Register() {
                             </Button>
                             <Grid container>
                                 <Grid item xs>
-                                    <Link href="#" variant="body2">
+                                    <Link href="#" variant="body2" disabled="true">
                                         Forgot password?
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="#" variant="body2">
-                                        {"Don't have an account? Sign Up"}
+                                    <Link href="/login" variant="body2">
+                                        {"Already have an account? Log In"}
                                     </Link>
                                 </Grid>
                             </Grid>

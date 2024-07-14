@@ -21,8 +21,8 @@ function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
+            <Link color="inherit" href="">
+                Swar Saadhna
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -48,6 +48,7 @@ export default function Login() {
         axios.get('http://127.0.0.1:8000/user/login', { params })
             .then(response => {
                 const token = response.data.data;
+                console.log("token  asdasdasd", token)
                 window.localStorage.setItem('token', token);
                 navigate('/main');
             })
@@ -66,7 +67,7 @@ export default function Login() {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+                        backgroundImage: 'url(/main.jpg)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
                             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -130,7 +131,7 @@ export default function Login() {
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="#" variant="body2">
+                                    <Link href="/register" variant="body2">
                                         {"Don't have an account? Sign Up"}
                                     </Link>
                                 </Grid>

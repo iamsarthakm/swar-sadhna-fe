@@ -90,7 +90,7 @@ export default function Player() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            width: '100%',
+            width: '600px',
             '& > *': {
                 m: 1,
             },

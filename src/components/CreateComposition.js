@@ -16,9 +16,9 @@ import Grid from '@material-ui/core/Grid';
 import qs from 'qs';
 const buttons = [
     { label: "Sa", value: "sa_s" },
-    // { label: "Re(k)", value: "re_k" },
+    { label: "Re(k)", value: "re_k" },
     { label: "Re", value: "re_s" },
-    // { label: "Ga(k)", value: "ga_k" },
+    { label: "Ga(k)", value: "ga_k" },
     { label: "Ga", value: "ga_s" },
     { label: "Ma(t)", value: "ma_t" },
     { label: "Ma", value: "ma_s" },
@@ -33,9 +33,7 @@ const buttons = [
 export default function Create() {
     const [selectedValues, setSelectedValues] = useState([]);
     const [taal, setTaal] = useState([]);
-    const [tempo, setTempo] = useState('');
     const [name, setName] = useState('');
-    const [scale, setScale] = useState('');
     const [gun, setGun] = useState('igun');
     const [rhythm, setrhythm] = useState('');
     const [start, setStart] = useState(1);
@@ -107,9 +105,9 @@ export default function Create() {
                 console.log(window.localStorage.getItem("token"))
                 const response = await axios({
                     method: 'GET',
-                    url: 'http://127.0.0.1:8000/sounds/taal', params: params, headers: headers
+                    url: 'http://127.0.0.1:8000/sound/taal', params: params, headers: headers
                 });
-                setTaal(response.data)
+                setTaal(response.data.data)
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -135,7 +133,6 @@ export default function Create() {
     }
     function handleSubmit(event) {
         event.preventDefault()
-        console.log(selectedValues, start, scale, tempo)
         const fetchAudio = async (data) => {
             const headers = {
                 Authorization: window.localStorage.getItem("token")
@@ -144,18 +141,18 @@ export default function Create() {
                 const response = await axios({
                     headers: headers,
                     method: "POST",
-                    url: "http://127.0.0.1:8000/sounds/",
+                    url: "http://127.0.0.1:8000/sound/composition",
                     data: data
                 });
                 console.log(response.data); // Log response for debugging
                 event.preventDefault()
-                return response.data
+                return response.data.data
             } catch (error) {
                 console.error('Error fetching audio:', error);
             }
         };
 
-        if (start, scale, tempo, selectedValues, taal, name) {
+        if (start, selectedValues, taal, name) {
             let main_comp = []
             for (let i = 0; i < start - 1; i++) {
                 main_comp.push({ "beat_name": taal[i], "notes": [""] })
@@ -169,12 +166,9 @@ export default function Create() {
             console.log(main_comp)
 
             let params = {
-                scale: scale,
-                tempo: tempo,
-                instrument: "harmonium",
                 rhythm: rhythm,
                 name: name,
-                sheet_composition: main_comp
+                notes_and_beats: main_comp
             }
             return fetchAudio(params);
         }
@@ -211,7 +205,7 @@ export default function Create() {
                         }}>
                             {/* <Button>Higher Octave</Button> */}
                             <ButtonGroup size="large" aria-label="Large button group">
-                                {buttons.slice(0, 5).map(({ label, value }) => (
+                                {buttons.slice(0, 6).map(({ label, value }) => (
                                     <Button key={value} onClick={() => handleButtonClick(value, "h")}>{label}</Button>
                                 ))}
                             </ButtonGroup>
@@ -254,7 +248,7 @@ export default function Create() {
                         }}>
                             {/* <Button>Lower Octave</Button> */}
                             <ButtonGroup size="large" aria-label="Large button group">
-                                {buttons.slice(7, 12).map(({ label, value }) => (
+                                {buttons.slice(5, 12).map(({ label, value }) => (
                                     <Button key={value} onClick={() => handleButtonClick(value, "l")}>{label}</Button>
                                 ))}
                             </ButtonGroup>
@@ -273,34 +267,7 @@ export default function Create() {
                 <form onSubmit={handleSubmit}>
                     <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
                         <Button fullWidth sx={{ height: 55, marginTop: 2 }} onClick={() => handleRemoveNote()}>Remove prev note</Button>
-                        <TextField
-                            label="Tempo"
-                            value={tempo}
-                            onChange={(e) => setTempo(e.target.value)}
-                            type="number"
-                            fullWidth
-                            margin="normal"
-                        />
-                        <FormControl fullWidth margin="normal">
-                            <InputLabel>Scale</InputLabel>
-                            <Select
-                                value={scale}
-                                onChange={(e) => setScale(e.target.value)}
-                            >
-                                <MenuItem value="f">F</MenuItem>
-                                <MenuItem value="f_sharp">F#</MenuItem>
-                                <MenuItem value="g">G</MenuItem>
-                                <MenuItem value="g_sharp">G#</MenuItem>
-                                <MenuItem value="a">A</MenuItem>
-                                <MenuItem value="a_sharp">A#</MenuItem>
-                                <MenuItem value="b">B</MenuItem>
-                                <MenuItem value="c">C</MenuItem>
-                                <MenuItem value="c_sharp">C#</MenuItem>
-                                <MenuItem value="d">D</MenuItem>
-                                <MenuItem value="d_sharp">D#</MenuItem>
-                                <MenuItem value="d_sharp">E</MenuItem>
-                            </Select>
-                        </FormControl>
+
                         <FormControl fullWidth margin="normal">
                             <TextField id="outlined-basic" label="Name" variant="outlined" value={name}
                                 onChange={(e) => setName(e.target.value)} />

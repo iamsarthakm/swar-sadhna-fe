@@ -19,14 +19,14 @@ export default function SavedMusic() {
         const headers = {
             // Your parameters here
             
-            Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTYyMzQ0NTEsImlkIjoyfQ.aUOPD6vQgATjNgvcONX6JTQSiCbLO63AEYysSK8zGTI',
+            Authorization: window.localStorage.getItem("token"),
             // param2: 'value2',
         };
 
-        axios.get('http://127.0.0.1:8000/sounds/', { headers })
+        axios.get('http://127.0.0.1:8000/sound/', { headers })
             .then(response => {
                 console.log(response)
-                setData(response.data);
+                setData(response.data.data);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
