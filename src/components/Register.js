@@ -16,7 +16,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import Navbar from './Navbar';
-
+import { API_ENDPOINT_SERVER } from '../api'
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -46,7 +46,7 @@ export default function Register() {
 
         const response = await axios({
             method: "POST",
-            url: 'http://127.0.0.1:8000/user/register',
+            url: `${API_ENDPOINT_SERVER}/user/register`,
             data: request_data
         })
     };

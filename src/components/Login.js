@@ -16,7 +16,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import Navbar from './Navbar';
-
+import { API_ENDPOINT_SERVER } from '../api'
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -45,7 +45,7 @@ export default function Login() {
             password: data.get('password'),
         };
 
-        axios.get('http://127.0.0.1:8000/user/login', { params })
+        axios.get(`${API_ENDPOINT_SERVER}/user/login`, { params })
             .then(response => {
                 const token = response.data.data;
                 console.log("token  asdasdasd", token)

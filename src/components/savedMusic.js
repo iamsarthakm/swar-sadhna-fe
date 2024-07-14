@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
+import { API_ENDPOINT_SERVER } from '../api'
 export default function SavedMusic() {
     const [data, setData] = React.useState([]);
     const [audioState, setAudioState] = React.useState({ url: null, playing: false, audio: null });
@@ -18,12 +19,12 @@ export default function SavedMusic() {
 
         const headers = {
             // Your parameters here
-            
+
             Authorization: window.localStorage.getItem("token"),
             // param2: 'value2',
         };
 
-        axios.get('http://127.0.0.1:8000/sound/', { headers })
+        axios.get(`${API_ENDPOINT_SERVER}/sound/`, { headers })
             .then(response => {
                 console.log(response)
                 setData(response.data.data);

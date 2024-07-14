@@ -14,6 +14,7 @@ import SheetMusic from './SheetMusic';
 import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import qs from 'qs';
+import { API_ENDPOINT_SERVER } from '../api'
 const buttons = [
     { label: "Sa", value: "sa_s" },
     { label: "Re(k)", value: "re_k" },
@@ -105,7 +106,7 @@ export default function Create() {
                 console.log(window.localStorage.getItem("token"))
                 const response = await axios({
                     method: 'GET',
-                    url: 'http://127.0.0.1:8000/sound/taal', params: params, headers: headers
+                    url: `${API_ENDPOINT_SERVER}/sound/taal`, params: params, headers: headers
                 });
                 setTaal(response.data.data)
 
@@ -141,7 +142,7 @@ export default function Create() {
                 const response = await axios({
                     headers: headers,
                     method: "POST",
-                    url: "http://127.0.0.1:8000/sound/composition",
+                    url: `${API_ENDPOINT_SERVER}/sound/composition`,
                     data: data
                 });
                 console.log(response.data); // Log response for debugging

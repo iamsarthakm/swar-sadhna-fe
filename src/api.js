@@ -1,0 +1,1 @@
+export const API_ENDPOINT_SERVER = process.env.REACT_APP_API_URL

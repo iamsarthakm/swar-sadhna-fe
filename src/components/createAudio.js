@@ -10,7 +10,7 @@ import Select from '@mui/material/Select';
 import { useState, useEffect } from 'react';
 import { TextField } from '@mui/material';
 import axios from 'axios';
-
+import { API_ENDPOINT_SERVER } from '../api'
 
 
 export default function CreateAudio() {
@@ -36,7 +36,7 @@ export default function CreateAudio() {
                 console.log(window.localStorage.getItem("token"))
                 const response = await axios({
                     method: 'GET',
-                    url: 'http://127.0.0.1:8000/sound/composition', params: params, headers: headers
+                    url: `${API_ENDPOINT_SERVER}/sound/composition`, params: params, headers: headers
                 });
                 setCompositionData(response.data.data)
 
@@ -59,7 +59,7 @@ export default function CreateAudio() {
                 const response = await axios({
                     headers: headers,
                     method: "POST",
-                    url: "http://127.0.0.1:8000/sound/",
+                    url: `${API_ENDPOINT_SERVER}/sound/`,
                     data: data
                 });
                 console.log(response.data); // Log response for debugging
