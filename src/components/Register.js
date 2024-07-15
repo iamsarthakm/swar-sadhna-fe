@@ -91,7 +91,7 @@ export default function Register() {
                                 required
                                 fullWidth
                                 id="username"
-                                label="Email or Phone No."
+                                label="Email"
                                 name="username"
                                 autoComplete="username"
                                 autoFocus

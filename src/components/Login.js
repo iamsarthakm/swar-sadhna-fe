@@ -97,7 +97,7 @@ export default function Login() {
                                 required
                                 fullWidth
                                 id="username"
-                                label="username"
+                                label="Email"
                                 name="username"
                                 autoComplete="username"
                                 autoFocus
