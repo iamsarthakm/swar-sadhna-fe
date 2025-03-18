@@ -194,7 +194,8 @@ export default function Create() {
                 <Box>
                     <Grid container
                         direction="row" sm={12}
-                        justifyContent="flex-end">
+                        // justifyContent="flex-end"
+                        >
                         <Box sx={{
                             // display: 'flex',
                             // flexDirection: 'row',
@@ -206,7 +207,7 @@ export default function Create() {
                         }}>
                             {/* <Button>Higher Octave</Button> */}
                             <ButtonGroup size="large" aria-label="Large button group">
-                                {buttons.slice(0, 6).map(({ label, value }) => (
+                                {buttons.slice(0, 12).map(({ label, value }) => (
                                     <Button key={value} onClick={() => handleButtonClick(value, "h")}>{label}</Button>
                                 ))}
                             </ButtonGroup>
@@ -236,7 +237,7 @@ export default function Create() {
                     <Grid
                         container
                         direction="row" sm={1}
-                        justifyContent="flex-end"
+                        // justifyContent="flex-end"
                     >
                         <Box sx={{
                             display: 'flex',
@@ -249,7 +250,7 @@ export default function Create() {
                         }}>
                             {/* <Button>Lower Octave</Button> */}
                             <ButtonGroup size="large" aria-label="Large button group">
-                                {buttons.slice(5, 12).map(({ label, value }) => (
+                                {buttons.slice(0, 12).map(({ label, value }) => (
                                     <Button key={value} onClick={() => handleButtonClick(value, "l")}>{label}</Button>
                                 ))}
                             </ButtonGroup>
